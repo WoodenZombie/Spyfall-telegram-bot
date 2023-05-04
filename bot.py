@@ -1,5 +1,4 @@
 from telegram.ext import Updater, CommandHandler, CallbackQueryHandler
-# НУЖНО ИСПРАВИТЬ: ЛОКАЦИИ РАБОТАЮТ НЕКОРРЕКТНО
 from locations import locations_dic
 import telegram
 import logging
@@ -51,8 +50,7 @@ def rules(update, context):
     reply_markup = telegram.InlineKeyboardMarkup(build_menu(button_list, n_cols=3, header_buttons = header_buttons))
     rule = io.open('file.txt', encoding='utf-8')
     query.edit_message_text(text=rule.read(), reply_markup=reply_markup)
-
-# DOESN'T WORK
+    
 # Кидает PDF-файл с официальными правилами от Hobby World // Sends PDF file with Hobby's World official rules
    
 def rulelist(update, context):
@@ -65,8 +63,8 @@ def back(update, context):
     query = update.callback_query
     query.edit_message_text(text = "test", reply_markup=keyboard())
 
-# Выводит список всех локаций, доступных в игре
-# НУЖНО ИСПРАВИТЬ: ЛОКАЦИИ РАБОТАЮТ НЕКОРРЕКТНО (неправильный импорт)
+# Выводит список всех локаций, доступных в игре / Sends a list of the locations
+
 def locations(update, context):
     query = update.callback_query
     button_list = [
@@ -78,7 +76,7 @@ def locations(update, context):
     location = io.open('location.txt', encoding='utf-8')
     query.edit_message_text(text = location.read(), reply_markup=reply_markup)
 
-# Выводит способ связаться со мной
+# Выводит способ связаться со мной / Sends a way to contact me
 
 def feedback(update, context):
     query = update.callback_query
@@ -213,7 +211,6 @@ def game_start(update, context):
         context.bot.sendMessage(chat_id = spy_id, text= "Вы - шпион. Вы должны угадать локацию, на которой находятся остальные игроки", reply_markup = reply_markup_spy)
         context.bot.sendMessage(chat_id = update.message.chat_id, text= "Игра началась! Вы можете посмотреть свои роли в личных сообщениях.")
 
-
 """def guess(update, context):
     global spy_id
     global loc
@@ -235,7 +232,7 @@ def game_start(update, context):
             context.bot.sendMessage(chat_id = group_id, text= "Игра окончена! Шпион %s неправильно назвал локацию. Поздравляю нешпионов с победой!" % (player_dict[spy_id]))
         clearGame()"""
 
-
+#Haven't implemented this function yet, must make some changes
 def guess(update, context):
     query = update.callback_query
     global loc
